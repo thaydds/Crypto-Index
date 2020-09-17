@@ -15,13 +15,14 @@ jobs:
       - name: Cache node modules
         uses: actions/cache@v2
         with:
-          path: '/node_modules'
+          path: "/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('/yarn.lock') }}
       - name: Install yarn and dependencies
         run: |
           npm install -g yarn
+          cd api
           yarn
           yarn --check-files
       - name: Check code quality
         run: |
-          yarn eslint src
+          cd api && yarn eslint src
