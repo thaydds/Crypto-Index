@@ -16,6 +16,14 @@ services:
       - 3333:3333
     depends_on:
       - database
+  client:
+    <<: *app
+    command: >
+      bash -c "cd client && yarn && yarn start"
+    ports:
+      - 3000:3000
+    depends_on:
+      - api
   database:
     image: "postgres"
     env_file:

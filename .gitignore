@@ -4,3 +4,9 @@ api/node_modules
 # API yarn files
 api/yarn-error.log
 
+# API Dependencies
+client/node_modules
+
+# API yarn files
+client/yarn-error.log
+
