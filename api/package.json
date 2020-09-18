@@ -6,13 +6,13 @@
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
     "build": "tsc",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
-    "lint": "eslint src/**/*.ts --max-warnings 5"
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "author": "thayrone santos",
   "license": "ISC",
   "dependencies": {
     "@types/jsonwebtoken": "^8.5.0",
+    "axios": "^0.20.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
