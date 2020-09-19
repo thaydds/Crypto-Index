@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Button } from './components';
-import { LoginForm } from './containers';
+import { LoginForm, RegisterForm } from './containers';
 
 export const StyledContainer = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ export const App = () => {
   return (
     <StyledContainer>
       {isLogin && <LoginForm />}
-
+      {!isLogin && <RegisterForm />}
       <StyleFlex>
         <p>{isLogin ? 'Não possui uma conta?' : 'Já possui uma conta?'}</p>
         <Button onClick={() => setIsLogin(!isLogin)} type="button">
