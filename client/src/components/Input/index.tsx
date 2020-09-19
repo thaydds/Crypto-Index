@@ -6,6 +6,6 @@ interface OwnProps {
   placeholder: string;
 }
 
-export const Input = ({ placeholder, type }: OwnProps) => (
-  <StyledInput placeholder={placeholder} type={type} />
+export const Input = ({ placeholder, type, ...rest }: OwnProps) => (
+  <StyledInput placeholder={placeholder} type={type} {...rest} />
 );
