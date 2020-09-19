@@ -6,6 +6,12 @@ interface OwnProps {
   children: React.ReactNode;
 }
 
-export const Button = ({ type, children }: OwnProps) => (
-  <StyledButton type={type}>{children}</StyledButton>
+export const Button = ({
+  type,
+  children,
+  ...rest
+}: OwnProps & React.ButtonHTMLAttributes<HTMLButtonElement>) => (
+  <StyledButton type={type} {...rest}>
+    {children}
+  </StyledButton>
 );
