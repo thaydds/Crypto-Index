@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form, Formik, Field, ErrorMessage, FieldProps } from 'formik';
 import * as yup from 'yup';
 import { Button, Input } from '../../components';
 import { StyledFormDiv } from './LoginForm.styled';
+import { AuthContext } from '../../context/AuthContext';
 
 const initialValues = {
   email: '',
@@ -17,46 +18,49 @@ const validation = yup.object().shape({
   password: yup.string().required('Password e um campo obrigatorio'),
 });
 
-export const LoginForm = () => (
-  <Formik
-    initialValues={initialValues}
-    onSubmit={({ email, password }) => console.log(email, password)}
-    validationSchema={validation}
-  >
-    {() => {
-      return (
-        <Form>
-          <StyledFormDiv>
-            <Field name="email">
-              {({
-                field, // { name, value, onChange, onBlur }
-                meta,
-              }: FieldProps) => (
-                <>
-                  <Input type="text" placeholder="Email" {...field} />
-                  {meta.touched && meta.error && (
-                    <ErrorMessage component="span" name="email" />
-                  )}
-                </>
-              )}
-            </Field>
-            <Field name="password">
-              {({
-                field, // { name, value, onChange, onBlur }
-                meta,
-              }: FieldProps) => (
-                <>
-                  <Input type="password" placeholder="Password" {...field} />
-                  {meta.touched && meta.error && (
-                    <ErrorMessage component="span" name="password" />
-                  )}
-                </>
-              )}
-            </Field>
-            <Button type="submit">Login</Button>
-          </StyledFormDiv>
-        </Form>
-      );
-    }}
-  </Formik>
-);
+export const LoginForm = () => {
+  const { login } = useContext(AuthContext);
+  return (
+    <Formik
+      initialValues={initialValues}
+      onSubmit={({ email, password }) => login({ email, password })}
+      validationSchema={validation}
+    >
+      {() => {
+        return (
+          <Form>
+            <StyledFormDiv>
+              <Field name="email">
+                {({
+                  field, // { name, value, onChange, onBlur }
+                  meta,
+                }: FieldProps) => (
+                  <>
+                    <Input type="text" placeholder="Email" {...field} />
+                    {meta.touched && meta.error && (
+                      <ErrorMessage component="span" name="email" />
+                    )}
+                  </>
+                )}
+              </Field>
+              <Field name="password">
+                {({
+                  field, // { name, value, onChange, onBlur }
+                  meta,
+                }: FieldProps) => (
+                  <>
+                    <Input type="password" placeholder="Password" {...field} />
+                    {meta.touched && meta.error && (
+                      <ErrorMessage component="span" name="password" />
+                    )}
+                  </>
+                )}
+              </Field>
+              <Button type="submit">Login</Button>
+            </StyledFormDiv>
+          </Form>
+        );
+      }}
+    </Formik>
+  );
+};
