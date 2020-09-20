@@ -19,8 +19,9 @@ const validation = yup.object().shape({
 });
 
 export const LoginForm = () => {
-  const { login } = useAuth();
+  const { login, user } = useAuth();
 
+  console.log('user', user);
   return (
     <Formik
       initialValues={initialValues}
