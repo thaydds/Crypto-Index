@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { Button, Input } from '../../components';
 import { StyledFormDiv, Error } from './LoginForm.styled';
 import { useAuth } from '../../context/AuthContext';
+import { useToast } from '../../context/ToastContext';
 
 const initialValues = {
   email: '',
@@ -19,17 +20,18 @@ const validation = yup.object().shape({
 });
 
 export const LoginForm = () => {
-  const { login, user } = useAuth();
+  const { login } = useAuth();
+  const { addToast } = useToast();
 
-  console.log('user', user);
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={async ({ email, password }) => {
         try {
           await login({ email, password });
+          addToast('success', 'Login realizado com sucesso.');
         } catch (err) {
-          console.log('Erro', err.message);
+          addToast('error', err.message);
         }
       }}
       validationSchema={validation}

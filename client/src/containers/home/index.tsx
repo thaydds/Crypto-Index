@@ -1,14 +1,15 @@
 import React from 'react';
-import { useToast } from '../../context/ToastContext';
+import { useAuth } from '../../context/AuthContext';
 
 export const Home = () => {
-  const { addToast } = useToast();
+  const { logout } = useAuth();
 
-  React.useEffect(() => {
-    addToast('success', 'testandoo');
-  }, [addToast]);
   return (
     <>
+      <button type="button" onClick={() => logout()}>
+        Logout
+      </button>
+
       <h1>Home</h1>
     </>
   );

@@ -31,6 +31,7 @@ export const ToastProvider: React.FC = ({ children }) => {
   useEffect(() => {
     if (data.message) {
       showToast({ type: data.type, message: data.message });
+      setData((prevState) => ({ ...prevState, message: '' }));
     }
   }, [data.message, data.type]);
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Formik, Field, FieldProps } from 'formik';
 import * as yup from 'yup';
 import { useApp } from '../../context/AppContext';
+import { useToast } from '../../context/ToastContext';
 import { Button, Input } from '../../components';
 import { StyledFormDiv, Error } from './LoginForm.styled';
 
@@ -22,14 +23,17 @@ const validation = yup.object().shape({
 
 export const RegisterForm = () => {
   const { register } = useApp();
+  const { addToast } = useToast();
+
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={async ({ email, password }) => {
         try {
           await register({ email, password });
+          addToast('success', 'Usuário cadastrado com sucesso.');
         } catch (err) {
-          console.log('Erro', err.message);
+          addToast('error', err.message);
         }
       }}
       validationSchema={validation}
