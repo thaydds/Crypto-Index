@@ -1,9 +1,12 @@
 import React from 'react';
-import { Login } from './containers';
+import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { Routes } from './routes';
 
 export const App = () => (
-  <AuthProvider>
-    <Login />
-  </AuthProvider>
+  <BrowserRouter>
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
+  </BrowserRouter>
 );
