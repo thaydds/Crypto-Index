@@ -1,4 +1,4 @@
-import React, { createContext, useCallback } from 'react';
+import React, { createContext, useCallback, useState, useContext } from 'react';
 import { api } from '../services/api';
 
 interface LoginCredencials {
@@ -6,9 +6,17 @@ interface LoginCredencials {
   password: string;
 }
 
+interface AuthState {
+  token: string;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  user: object;
+}
+
 interface AuthContextState {
-  name: string;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  user: object;
   login: (loginCredencials: LoginCredencials) => void;
+  logout: () => void;
 }
 
 export const AuthContext = createContext<AuthContextState>(
@@ -16,14 +24,49 @@ export const AuthContext = createContext<AuthContextState>(
 );
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const login = useCallback(async ({ email, password }) => {
-    const response = await api.post('sessions', { email, password });
+  const [data, setData] = useState<AuthState>(() => {
+    const token = localStorage.getItem('@trybe:token');
+    const user = localStorage.getItem('@trybe:user');
+    if (token && user) {
+      return { token, user: JSON.parse(user) };
+    }
 
-    console.log('response', response.data);
+    return {} as AuthState;
+  });
+
+  const login = useCallback(async ({ email, password }) => {
+    const response = await api.post('sessions', {
+      email,
+      password,
+    });
+
+    const { token, user } = response.data;
+
+    localStorage.setItem('@trybe:token', token);
+    localStorage.setItem('@trybe:user', JSON.stringify(user));
+
+    setData({ token, user });
+  }, []);
+
+  const logout = useCallback(() => {
+    localStorage.removeItem('@trybe:token');
+    localStorage.removeItem('@trybe:user');
+
+    setData({} as AuthState);
   }, []);
   return (
-    <AuthContext.Provider value={{ name: 'teste', login }}>
+    <AuthContext.Provider value={{ user: data.user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
+};
+
+export const useAuth = (): AuthContextState => {
+  const context = useContext(AuthContext);
+
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+
+  return context;
 };

@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Form, Formik, Field, ErrorMessage, FieldProps } from 'formik';
 import * as yup from 'yup';
 import { Button, Input } from '../../components';
 import { StyledFormDiv } from './LoginForm.styled';
-import { AuthContext } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
 const initialValues = {
   email: '',
@@ -19,7 +19,8 @@ const validation = yup.object().shape({
 });
 
 export const LoginForm = () => {
-  const { login } = useContext(AuthContext);
+  const { login } = useAuth();
+
   return (
     <Formik
       initialValues={initialValues}
