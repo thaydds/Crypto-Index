@@ -24,6 +24,15 @@ const HomeContainer = styled.div`
   flex-direction: column;
   margin-top: 159px;
 `;
+
+const getRate = (locale: string, currency: string, value: number) => {
+  const rate = new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency,
+  }).format(value);
+
+  return rate;
+};
 export const Home = () => {
   const [value, setValue] = useState(1);
   const { logout } = useAuth();
@@ -42,6 +51,7 @@ export const Home = () => {
         <Input
           placeholder=""
           type="number"
+          min="1"
           value={value}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setValue(Number(event.target.value))
@@ -49,7 +59,9 @@ export const Home = () => {
         />
         <ValueContainer>
           {bpi.map((data) => (
-            <ValueDiv key={data.code}>{data.rate_float * value}</ValueDiv>
+            <ValueDiv key={data.code}>
+              {getRate(data.locale, data.code, data.rate_float * value)}
+            </ValueDiv>
           ))}
         </ValueContainer>
       </HomeContainer>

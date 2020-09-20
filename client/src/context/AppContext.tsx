@@ -12,6 +12,7 @@ interface BPI {
   description: string;
   // eslint-disable-next-line camelcase
   rate_float: number;
+  locale: string;
 }
 
 interface AppState {
