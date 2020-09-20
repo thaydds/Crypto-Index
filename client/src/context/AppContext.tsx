@@ -6,21 +6,36 @@ interface LoginCredencials {
   password: string;
 }
 
+interface BPI {
+  code: string;
+  rate: string;
+  description: string;
+  // eslint-disable-next-line camelcase
+  rate_float: number;
+}
+
 interface AppState {
   // eslint-disable-next-line @typescript-eslint/ban-types
   user: object;
 }
 
+interface BPIState {
+  bpi: BPI[];
+}
+
 interface AppContextState {
   // eslint-disable-next-line @typescript-eslint/ban-types
   user: object;
+  bpi: BPI[];
   register: (loginCredencials: LoginCredencials) => void;
+  getData: () => void;
 }
 
 export const AppContext = createContext<AppContextState>({} as AppContextState);
 
 export const AppProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AppState>({} as AppState);
+  const [bpi, setBpt] = useState<BPIState>({ bpi: [] });
 
   const register = useCallback(async ({ email, password }) => {
     try {
@@ -36,8 +51,29 @@ export const AppProvider: React.FC = ({ children }) => {
     }
   }, []);
 
+  const getData = useCallback(async () => {
+    try {
+      const token = localStorage.getItem('@trybe:token');
+
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+      const response = await api.get('btc', config);
+
+      const bptData = {
+        bpi: Object.values(response.data.bpi).map((t) => t),
+      } as BPIState;
+
+      setBpt(bptData);
+    } catch (err) {
+      throw new Error(err.response.data.message);
+    }
+  }, []);
+
   return (
-    <AppContext.Provider value={{ user: data.user, register }}>
+    <AppContext.Provider
+      value={{ user: data.user, register, getData, bpi: bpi.bpi }}
+    >
       {children}
     </AppContext.Provider>
   );
