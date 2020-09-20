@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import { Button } from '../../components';
 import { LoginForm, RegisterForm } from '..';
 
-export const StyledContainer = styled.div`
+export const StyledContainer = styled.div<{ inverse: boolean }>`
   display: flex;
   justify-content: space-around;
+  flex-direction: ${(props) => (props.inverse ? 'row-reverse' : 'row')};
   align-items: center;
   max-width: 600px;
   margin: 30vh auto;
@@ -21,7 +22,7 @@ export const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
 
   return (
-    <StyledContainer>
+    <StyledContainer inverse={!isLogin}>
       {isLogin && <LoginForm />}
       {!isLogin && <RegisterForm />}
       <StyleFlex>
