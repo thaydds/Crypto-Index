@@ -1,9 +1,9 @@
 import React from 'react';
-import { Form, Formik, Field, ErrorMessage, FieldProps } from 'formik';
+import { Form, Formik, Field, FieldProps } from 'formik';
 import * as yup from 'yup';
 import { useApp } from '../../context/AppContext';
 import { Button, Input } from '../../components';
-import { StyledFormDiv } from './LoginForm.styled';
+import { StyledFormDiv, Error } from './LoginForm.styled';
 
 const initialValues = {
   email: '',
@@ -46,7 +46,7 @@ export const RegisterForm = () => {
                   <>
                     <Input type="text" placeholder="Email" {...field} />
                     {meta.touched && meta.error && (
-                      <ErrorMessage component="span" name="email" />
+                      <Error component="span" name="email" />
                     )}
                   </>
                 )}
@@ -59,7 +59,7 @@ export const RegisterForm = () => {
                   <>
                     <Input type="password" placeholder="Password" {...field} />
                     {meta.touched && meta.error && (
-                      <ErrorMessage component="span" name="password" />
+                      <Error component="span" name="password" />
                     )}
                   </>
                 )}
@@ -72,7 +72,7 @@ export const RegisterForm = () => {
                   <>
                     <Input type="password" placeholder="Password" {...field} />
                     {meta.touched && meta.error && (
-                      <ErrorMessage component="span" name="repassword" />
+                      <Error component="span" name="repassword" />
                     )}
                   </>
                 )}
