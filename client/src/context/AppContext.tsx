@@ -23,14 +23,17 @@ export const AppProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AppState>({} as AppState);
 
   const register = useCallback(async ({ email, password }) => {
-    const response = await api.post('users', {
-      email,
-      password,
-    });
+    try {
+      const response = await api.post('users', {
+        email,
+        password,
+      });
 
-    const { user } = response.data;
-
-    setData({ user });
+      const { user } = response.data;
+      setData({ user });
+    } catch (err) {
+      throw new Error(err.response.data.message);
+    }
   }, []);
 
   return (
@@ -40,11 +43,11 @@ export const AppProvider: React.FC = ({ children }) => {
   );
 };
 
-export const useAuth = (): AppContextState => {
+export const useApp = (): AppContextState => {
   const context = useContext(AppContext);
 
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error('useApp must be used within an AppProvider');
   }
 
   return context;

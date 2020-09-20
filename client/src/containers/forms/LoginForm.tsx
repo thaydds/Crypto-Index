@@ -24,7 +24,13 @@ export const LoginForm = () => {
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={({ email, password }) => login({ email, password })}
+      onSubmit={async ({ email, password }) => {
+        try {
+          await login({ email, password });
+        } catch (err) {
+          console.log('Erro', err.message);
+        }
+      }}
       validationSchema={validation}
     >
       {() => {
