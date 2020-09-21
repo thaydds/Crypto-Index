@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Formik, Field, FieldProps } from 'formik';
+import { Form, Formik, Field, FieldProps, FormikProps } from 'formik';
 import * as yup from 'yup';
 import { Button, Input } from '../../components';
 import { StyledFormDiv, Error } from './LoginForm.styled';
@@ -11,12 +11,21 @@ const initialValues = {
   password: '',
 };
 
+interface LoginFormProps {
+  email: string;
+  password: string;
+}
+
 const validation = yup.object().shape({
   email: yup
     .string()
     .email('Digite um Email valido')
     .required('Email e um campo obrigatorio'),
-  password: yup.string().required('Password e um campo obrigatorio'),
+  password: yup
+    .string()
+    .required('Password e um campo obrigatorio')
+    .length(6, 'O Password deve ter 6 digitos')
+    .matches(/^\d+$/, 'Apenas digitos são permitidos'),
 });
 
 export const LoginForm = () => {
@@ -36,7 +45,8 @@ export const LoginForm = () => {
       }}
       validationSchema={validation}
     >
-      {() => {
+      {(formik: FormikProps<LoginFormProps>) => {
+        const { dirty, isValid } = formik;
         return (
           <Form>
             <StyledFormDiv>
@@ -66,7 +76,9 @@ export const LoginForm = () => {
                   </>
                 )}
               </Field>
-              <Button type="submit">Login</Button>
+              <Button type="submit" disabled={!isValid || !dirty}>
+                Login
+              </Button>
             </StyledFormDiv>
           </Form>
         );

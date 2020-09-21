@@ -10,6 +10,11 @@ export const StyledContainer = styled.div<{ inverse: boolean }>`
   align-items: center;
   max-width: 600px;
   margin: 30vh auto;
+
+  @media all and (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const StyleFlex = styled.div`
