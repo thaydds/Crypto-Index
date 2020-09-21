@@ -49,4 +49,5 @@ export const HomeContainer = styled.div`
   align-items: center;
   flex-direction: column;
   margin-top: 200px;
+  position: relative;
 `;
