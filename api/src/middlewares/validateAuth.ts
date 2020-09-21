@@ -15,7 +15,7 @@ export default function ensureAuthenticated(
 ): void {
   const authHeader = request.headers.authorization;
   if (!authHeader) {
-    throw new AppError('JWT token is missing', 401);
+    throw new AppError('JWT token é necessário para acessar essa rota.', 401);
   }
   const [, token] = authHeader.split(' ');
   try {
@@ -26,6 +26,6 @@ export default function ensureAuthenticated(
     };
     return next();
   } catch (err) {
-    throw new AppError('Invalid JWT token', 401);
+    throw new AppError('JWT token Invalido', 401);
   }
 }

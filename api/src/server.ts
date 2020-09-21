@@ -12,4 +12,5 @@ app.use(express.json());
 app.use(routes);
 app.use(handleErrors);
 
+// eslint-disable-next-line no-console
 app.listen(3333, () => console.log('backend started at port 3333 🙌'));
