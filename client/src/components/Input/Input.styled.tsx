@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 
-export const StyledInput = styled.input`
+interface OnwProps {
+  widh?: string;
+}
+
+export const StyledInput = styled.input<OnwProps>`
   margin: 5px;
   display: inline-block;
   height: 38px;
   padding: 0 15px;
   color: #555;
-  width: 300px;
+  width: ${(props) => (props.width ? `${props.width}px` : '300px')};
   letter-spacing: 0.1rem;
   text-decoration: none;
   white-space: nowrap;

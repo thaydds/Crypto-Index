@@ -1,29 +1,13 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Nav, Input } from '../../components';
+import { Nav, Input, AnimatedText } from '../../components';
+import {
+  CardContainer,
+  HomeContainer,
+  StyledCard,
+  StyledH2,
+} from './Home.styled';
 import { useAuth } from '../../context/AuthContext';
 import { useApp } from '../../context/AppContext';
-
-const ValueDiv = styled.div`
-  border: 1px solid black;
-  width: 150px;
-  text-align: center;
-  padding: 10px;
-  border-radius: 5px;
-`;
-
-const ValueContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 1000px;
-`;
-
-const HomeContainer = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 159px;
-`;
 
 const getRate = (locale: string, currency: string, value: number) => {
   const rate = new Intl.NumberFormat(locale, {
@@ -38,32 +22,36 @@ export const Home = () => {
   const { logout } = useAuth();
   const { getData, bpi } = useApp();
 
-  console.log('bpi', bpi);
-
   React.useEffect(() => {
     getData();
   }, [getData]);
   return (
     <>
       <Nav handleClick={() => logout()} />
+      <AnimatedText />
       <HomeContainer>
-        <h1>Bem vindo</h1>
+        <StyledH2>Bitcoin</StyledH2>
         <Input
+          style={{ textAlign: 'center' }}
           placeholder=""
           type="number"
           min="1"
+          width="100"
           value={value}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setValue(Number(event.target.value))
           }
         />
-        <ValueContainer>
+        <CardContainer>
           {bpi.map((data) => (
-            <ValueDiv key={data.code}>
-              {getRate(data.locale, data.code, data.rate_float * value)}
-            </ValueDiv>
+            <StyledCard key={data.code}>
+              <p>{data.code}</p>
+              <span>
+                {getRate(data.locale, data.code, data.rate_float * value)}
+              </span>
+            </StyledCard>
           ))}
-        </ValueContainer>
+        </CardContainer>
       </HomeContainer>
     </>
   );
