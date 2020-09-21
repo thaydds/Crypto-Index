@@ -1,13 +1,6 @@
 import axios from 'axios';
+// import writeJsonFile from 'write-json-file';
 import currencies from '../currencies.json';
-
-interface Currencie {
-  code: string;
-  rate: string;
-  description: string;
-  // eslint-disable-next-line camelcase
-  rate_float: number;
-}
 
 const getRate = (
   locale: string,
@@ -50,6 +43,7 @@ class GenerateBitcoinPrices {
             style: 'currency',
             currency: 'USD',
           }).format(getPrices.bpi.USD.rate_float),
+          locale: 'en-US',
         },
         CNY: {
           ...getPrices.bpi.CNY,
@@ -57,24 +51,28 @@ class GenerateBitcoinPrices {
             style: 'currency',
             currency: 'CNY',
           }).format(getPrices.bpi.CNY.rate_float),
+          locale: 'zh-cn',
         },
         BRL: {
           code: 'BRL',
           rate: getRate('pt-BR', 'BRL', currencies.BRL, dolarPrice),
           description: 'Brazilian Real',
           rate_float: getRateFloat(currencies.BRL, dolarPrice),
+          locale: 'pt-BR',
         },
         EUR: {
           code: 'EUR',
           rate: getRate('de-DE', 'EUR', currencies.EUR, dolarPrice),
           description: 'Euro',
           rate_float: getRateFloat(currencies.EUR, dolarPrice),
+          locale: 'de-DE',
         },
         CAD: {
           code: 'CAD',
           rate: getRate('en-CA', 'CAD', currencies.CAD, dolarPrice),
           description: 'Canadian Dollar',
           rate_float: getRateFloat(currencies.CAD, dolarPrice),
+          locale: 'en-CA',
         },
       },
     };

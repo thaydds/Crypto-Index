@@ -6,4 +6,6 @@ const btcRouter = Router();
 
 btcRouter.get('/', ValidateAuth, BtcController.store);
 
+btcRouter.post('/', ValidateAuth, BtcController.updateCurrency);
+
 export default btcRouter;
