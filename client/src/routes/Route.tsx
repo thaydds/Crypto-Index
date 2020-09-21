@@ -5,6 +5,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { Nav } from '../components';
 
 interface RouteProps extends ReactDOMRouteProps {
   isPrivate?: boolean;
@@ -16,14 +17,17 @@ export const CustomRoute: React.FC<RouteProps> = ({
   component: Component,
   ...rest
 }) => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   return (
     <ReactDOMRoute
       {...rest}
       render={({ location }) => {
         return isPrivate === !!user ? (
-          <Component />
+          <>
+            <Nav handleClick={() => logout()} />
+            <Component />
+          </>
         ) : (
           <Redirect
             to={{

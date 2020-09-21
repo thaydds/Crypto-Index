@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Nav, Input, AnimatedText } from '../../components';
+import { Input, AnimatedText } from '../../components';
 import {
   CardContainer,
   HomeContainer,
   StyledCard,
   StyledH2,
 } from './Home.styled';
-import { useAuth } from '../../context/AuthContext';
 import { useApp } from '../../context/AppContext';
 
 const getRate = (locale: string, currency: string, value: number) => {
@@ -19,7 +18,6 @@ const getRate = (locale: string, currency: string, value: number) => {
 };
 export const Home = () => {
   const [value, setValue] = useState(1);
-  const { logout } = useAuth();
   const { getData, bpi } = useApp();
 
   React.useEffect(() => {
@@ -27,7 +25,6 @@ export const Home = () => {
   }, [getData]);
   return (
     <>
-      <Nav handleClick={() => logout()} />
       <AnimatedText />
       <HomeContainer>
         <StyledH2>Bitcoin</StyledH2>
