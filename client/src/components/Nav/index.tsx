@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { StyledNav } from './Nav.styled';
 
 interface OwnProps {
@@ -15,6 +16,9 @@ export const Nav = ({ handleClick }: OwnProps) => (
         <a href="/">Crypto</a>
       </h1>
       <ul className="nav_container__routes">
+        <li>
+          <Link to="/atualizar">Atualizar Moedas</Link>
+        </li>
         <li>
           <a onClick={handleClick}>Sair</a>
         </li>

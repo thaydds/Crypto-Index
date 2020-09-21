@@ -1,11 +1,12 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { Login, Home } from '../containers';
-import { Route } from './Route';
+import { CustomRoute } from './Route';
 
 export const Routes = () => (
   <Switch>
-    <Route path="/" exact component={Login} />
-    <Route path="/home" exact component={Home} isPrivate />
+    <CustomRoute path="/" exact component={Login} />
+    <CustomRoute path="/home" exact component={Home} isPrivate />
+    <Route path="/" component={() => <h1>Página não existe</h1>} />
   </Switch>
 );
