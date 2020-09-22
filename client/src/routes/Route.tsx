@@ -25,7 +25,7 @@ export const CustomRoute: React.FC<RouteProps> = ({
       render={({ location }) => {
         return isPrivate === !!user ? (
           <>
-            <Nav handleClick={() => logout()} />
+            {user && <Nav handleClick={() => logout()} />}
             <Component />
           </>
         ) : (
