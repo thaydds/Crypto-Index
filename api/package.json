@@ -4,7 +4,7 @@
   "description": "learning some stuffs",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
+    "dev": "ts-node --transpile-only src/server.ts",
     "build": "tsc",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },

@@ -17,7 +17,7 @@ export const Nav = ({ handleClick }: OwnProps) => (
       </h1>
       <ul className="nav_container__routes">
         <li>
-          <Link to="/atualizar">Atualizar Moedas</Link>
+          <Link to="/update">Atualizar Moedas</Link>
         </li>
         <li>
           <a onClick={handleClick}>Sair</a>

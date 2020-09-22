@@ -1,10 +1,13 @@
 import React from 'react';
 import { Form, Formik, Field, FieldProps, FormikProps } from 'formik';
+import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
-import { useApp } from '../../context/AppContext';
 import { useToast } from '../../context/ToastContext';
-import { Button, Input } from '../../components';
-import { StyledFormDiv, Error } from './LoginForm.styled';
+import { useApp } from '../../context/AppContext';
+import { Button, Select } from '../../components';
+import { CurrencyInput } from '../../components/Input/CurrencyInput';
+
+import { StyledFormDiv, Error, ButtonContainer } from './LoginForm.styled';
 
 const initialValues = {
   currency: '',
@@ -23,13 +26,20 @@ const validation = yup.object().shape({
 
 export const UpdateForm = () => {
   const { addToast } = useToast();
+  const { updateCurrency } = useApp();
+  const history = useHistory();
 
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={async ({ newValue, currency }) => {
         try {
-          addToast('success', 'Usuário cadastrado com sucesso.');
+          await updateCurrency({
+            currency,
+            newValue: Number(newValue.replace('$', '')),
+          });
+          addToast('success', `Moeda ${currency} atualizada para ${newValue}`);
+          history.push('/home');
         } catch (err) {
           addToast('error', err.message);
         }
@@ -42,48 +52,49 @@ export const UpdateForm = () => {
         return (
           <Form>
             <StyledFormDiv>
-              <Field name="email">
+              <Field name="currency">
                 {({
                   field, // { name, value, onChange, onBlur }
                   meta,
                 }: FieldProps) => (
                   <>
-                    <Input type="text" placeholder="Email" {...field} />
-                    {meta.touched && meta.error && (
-                      <Error component="span" name="email" />
-                    )}
-                  </>
-                )}
-              </Field>
-              <Field name="password">
-                {({
-                  field, // { name, value, onChange, onBlur }
-                  meta,
-                }: FieldProps) => (
-                  <>
-                    <Input type="password" placeholder="Password" {...field} />
+                    <Select {...field} />
                     {meta.touched && meta.error && (
                       <Error component="span" name="password" />
                     )}
                   </>
                 )}
               </Field>
-              <Field name="repassword">
+              <Field name="newValue">
                 {({
                   field, // { name, value, onChange, onBlur }
                   meta,
                 }: FieldProps) => (
                   <>
-                    <Input type="password" placeholder="Password" {...field} />
+                    <CurrencyInput
+                      type="text"
+                      placeholder="ex: 5.44"
+                      {...field}
+                    />
                     {meta.touched && meta.error && (
-                      <Error component="span" name="repassword" />
+                      <Error component="span" name="password" />
                     )}
                   </>
                 )}
               </Field>
-              <Button type="submit" disabled={!isValid || !dirty}>
-                Cadastrar
-              </Button>
+              <ButtonContainer>
+                <Button type="submit" disabled={!isValid || !dirty}>
+                  Cadastrar
+                </Button>
+                <Button
+                  style={{ width: '100%' }}
+                  type="button"
+                  disabled={false}
+                  onClick={() => history.push('/home')}
+                >
+                  Voltar
+                </Button>
+              </ButtonContainer>
             </StyledFormDiv>
           </Form>
         );

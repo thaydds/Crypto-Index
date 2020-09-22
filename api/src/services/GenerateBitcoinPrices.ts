@@ -1,6 +1,7 @@
 import axios from 'axios';
+import fs from 'fs';
+import path from 'path';
 // import writeJsonFile from 'write-json-file';
-import currencies from '../currencies.json';
 
 const getRate = (
   locale: string,
@@ -21,6 +22,13 @@ const getRateFloat = (currencyValue: string, dollar: number) =>
 
 class GenerateBitcoinPrices {
   async execute(): Promise<any> {
+    const rawdata = fs.readFileSync(
+      path.join(__dirname, '../currencies.json'),
+      'utf-8',
+    );
+
+    const currencies = JSON.parse(rawdata);
+
     let getPrices = {} as any;
 
     await axios
@@ -34,6 +42,7 @@ class GenerateBitcoinPrices {
 
     const dolarPrice = getPrices.bpi.USD.rate_float;
 
+    console.log('prices', currencies);
     const newPrices = {
       ...getPrices,
       bpi: {

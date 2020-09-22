@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const StyledInput = styled.input`
+interface OnwProps {
+  width?: string;
+}
+
+export const StyledSelect = styled.select<{ width?: string }>`
   margin: 5px;
   display: inline-block;
   height: 38px;

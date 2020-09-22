@@ -1,4 +1,10 @@
 import React from 'react';
-import { CurrencyInput } from '../../components/Input/CurrencyInput';
+import { UpdateForm } from '../forms/UpdateForm';
+import { StyledTitle, StyledUpdateContainer } from './Update.styled';
 
-export const Update = () => <CurrencyInput />;
+export const Update = () => (
+  <StyledUpdateContainer>
+    <StyledTitle>Atualizar Moeda</StyledTitle>
+    <UpdateForm />
+  </StyledUpdateContainer>
+);

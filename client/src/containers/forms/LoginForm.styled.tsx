@@ -14,3 +14,8 @@ export const Error = styled(ErrorMessage)`
   color: red;
   padding: 5px;
 `;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space;
+`;

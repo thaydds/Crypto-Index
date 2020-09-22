@@ -6,6 +6,11 @@ interface LoginCredencials {
   password: string;
 }
 
+interface UpdateCurrencyProps {
+  currency: string;
+  newValue: number;
+}
+
 interface BPI {
   code: string;
   rate: string;
@@ -29,6 +34,7 @@ interface AppContextState {
   user: object;
   bpi: BPI[];
   register: (loginCredencials: LoginCredencials) => void;
+  updateCurrency: (updateCurrencyProps: UpdateCurrencyProps) => void;
   getData: () => void;
 }
 
@@ -47,6 +53,23 @@ export const AppProvider: React.FC = ({ children }) => {
 
       const { user } = response.data;
       setData({ user });
+    } catch (err) {
+      throw new Error(err.response.data.message);
+    }
+  }, []);
+
+  const updateCurrency = useCallback(async ({ currency, newValue }) => {
+    try {
+      const token = localStorage.getItem('@trybe:token');
+
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+      const responseData = {
+        currency,
+        value: newValue,
+      };
+      await api.post('/btc', responseData, config);
     } catch (err) {
       throw new Error(err.response.data.message);
     }
@@ -73,7 +96,13 @@ export const AppProvider: React.FC = ({ children }) => {
 
   return (
     <AppContext.Provider
-      value={{ user: data.user, register, getData, bpi: bpi.bpi }}
+      value={{
+        user: data.user,
+        register,
+        getData,
+        bpi: bpi.bpi,
+        updateCurrency,
+      }}
     >
       {children}
     </AppContext.Provider>
