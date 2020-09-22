@@ -3,6 +3,7 @@ import { Form, Formik, Field, FieldProps, FormikProps } from 'formik';
 import * as yup from 'yup';
 import { useApp } from '../../context/AppContext';
 import { useToast } from '../../context/ToastContext';
+import { useAuth } from '../../context/AuthContext';
 import { Button, Input } from '../../components';
 import { StyledFormDiv, Error } from './LoginForm.styled';
 
@@ -39,6 +40,7 @@ const validation = yup.object().shape({
 export const RegisterForm = () => {
   const { register } = useApp();
   const { addToast } = useToast();
+  const { login } = useAuth();
 
   return (
     <Formik
@@ -47,6 +49,7 @@ export const RegisterForm = () => {
         try {
           await register({ email, password });
           addToast('success', 'Usuário cadastrado com sucesso.');
+          login({ email, password });
         } catch (err) {
           addToast('error', err.message);
         }
