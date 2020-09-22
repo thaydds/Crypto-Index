@@ -64,9 +64,7 @@ describe('RegisterForm', () => {
     expect(getByTestId('passwordError')).toBeTruthy();
   });
   it('should be able display an erro when re-password is not equals to password', async () => {
-    const { getByPlaceholderText, getByTestId, debug } = render(
-      <RegisterForm />,
-    );
+    const { getByPlaceholderText, getByTestId } = render(<RegisterForm />);
 
     const passwordInput = getByPlaceholderText('Password');
     const repasswordInput = getByPlaceholderText('Re-Password');
@@ -78,6 +76,5 @@ describe('RegisterForm', () => {
     });
 
     expect(getByTestId('repasswordError')).toBeTruthy();
-    debug();
   });
 });
