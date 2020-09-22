@@ -32,7 +32,11 @@ export const Login = () => {
       {!isLogin && <RegisterForm />}
       <StyleFlex>
         <p>{isLogin ? 'Não possui uma conta?' : 'Já possui uma conta?'}</p>
-        <Button onClick={() => setIsLogin(!isLogin)} type="button">
+        <Button
+          data-testid="loginPageButton"
+          onClick={() => setIsLogin(!isLogin)}
+          type="button"
+        >
           {isLogin ? 'Cadastre-se' : 'Logar'}
         </Button>
       </StyleFlex>

@@ -56,9 +56,20 @@ export const LoginForm = () => {
                   meta,
                 }: FieldProps) => (
                   <>
-                    <Input type="text" placeholder="Email" {...field} />
+                    <Input
+                      data-testid="email"
+                      type="text"
+                      placeholder="Email"
+                      {...field}
+                    />
                     {meta.touched && meta.error && (
-                      <Error component="span" name="email" />
+                      <>
+                        <Error
+                          data-testid="emailError"
+                          component="span"
+                          name="email"
+                        />
+                      </>
                     )}
                   </>
                 )}
@@ -71,7 +82,11 @@ export const LoginForm = () => {
                   <>
                     <Input type="password" placeholder="Password" {...field} />
                     {meta.touched && meta.error && (
-                      <Error component="span" name="password" />
+                      <Error
+                        data-testid="passwordError"
+                        component="span"
+                        name="password"
+                      />
                     )}
                   </>
                 )}

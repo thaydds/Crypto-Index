@@ -70,7 +70,11 @@ export const RegisterForm = () => {
                   <>
                     <Input type="text" placeholder="Email" {...field} />
                     {meta.touched && meta.error && (
-                      <Error component="span" name="email" />
+                      <Error
+                        data-testid="emailError"
+                        component="span"
+                        name="email"
+                      />
                     )}
                   </>
                 )}
@@ -83,7 +87,11 @@ export const RegisterForm = () => {
                   <>
                     <Input type="password" placeholder="Password" {...field} />
                     {meta.touched && meta.error && (
-                      <Error component="span" name="password" />
+                      <Error
+                        data-testid="passwordError"
+                        component="span"
+                        name="password"
+                      />
                     )}
                   </>
                 )}
@@ -94,9 +102,17 @@ export const RegisterForm = () => {
                   meta,
                 }: FieldProps) => (
                   <>
-                    <Input type="password" placeholder="Password" {...field} />
+                    <Input
+                      type="password"
+                      placeholder="Re-Password"
+                      {...field}
+                    />
                     {meta.touched && meta.error && (
-                      <Error component="span" name="repassword" />
+                      <Error
+                        data-testid="repasswordError"
+                        component="span"
+                        name="repassword"
+                      />
                     )}
                   </>
                 )}
