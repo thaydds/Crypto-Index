@@ -45,11 +45,15 @@ export const UpdateForm = () => {
 
   useEffect(() => {
     const getCurrencies = async () => {
-      const response = await api.get('btc/currencies');
-      setCurrencies(response.data);
+      try {
+        const response = await api.get('btc/currencies');
+        setCurrencies(response.data);
+      } catch (err) {
+        addToast('error', err.message);
+      }
     };
     getCurrencies();
-  }, []);
+  }, [addToast]);
 
   return (
     <Formik

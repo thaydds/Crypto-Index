@@ -7,6 +7,7 @@ import {
   StyledH2,
 } from './Home.styled';
 import { useApp } from '../../context/AppContext';
+import { useToast } from '../../context/ToastContext';
 
 const getRate = (locale: string, currency: string, value: number) => {
   const rate = new Intl.NumberFormat(locale, {
@@ -19,10 +20,18 @@ const getRate = (locale: string, currency: string, value: number) => {
 export const Home = () => {
   const [value, setValue] = useState(1);
   const { getData, bpi } = useApp();
+  const { addToast } = useToast();
 
   React.useEffect(() => {
-    getData();
-  }, [getData]);
+    const getBtc = async () => {
+      try {
+        await getData();
+      } catch (err) {
+        addToast('error', err.message);
+      }
+    };
+    getBtc();
+  }, [getData, addToast]);
   return (
     <>
       <AnimatedText />
