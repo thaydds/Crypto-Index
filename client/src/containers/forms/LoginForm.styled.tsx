@@ -19,3 +19,11 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: space;
 `;
+
+export const Title = styled.p`
+  font-size: 0.9rem;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  font-style: bold;
+  margin-left: 10px;
+`;

@@ -50,6 +50,17 @@ class BtcController {
 
     return response.status(400).json({ message: 'algo deu errado' });
   }
+
+  static getCurrency(_: Request, response: Response): Response {
+    const rawdata = fs.readFileSync(
+      path.join(__dirname, '../currencies.json'),
+      'utf-8',
+    );
+
+    const currencies = JSON.parse(rawdata);
+
+    return response.json(currencies);
+  }
 }
 
 export default BtcController;

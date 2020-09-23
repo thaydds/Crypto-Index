@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Formik, Field, FieldProps, FormikProps } from 'formik';
 import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
@@ -6,13 +6,26 @@ import { useToast } from '../../context/ToastContext';
 import { useApp } from '../../context/AppContext';
 import { Button, Select } from '../../components';
 import { CurrencyInput } from '../../components/Input/CurrencyInput';
+import { api } from '../../services/api';
 
-import { StyledFormDiv, Error, ButtonContainer } from './LoginForm.styled';
+import {
+  StyledFormDiv,
+  Error,
+  ButtonContainer,
+  Title,
+} from './LoginForm.styled';
 
 const initialValues = {
   currency: '',
   newValue: '',
 };
+interface Currencies {
+  [key: string]: string;
+}
+
+function getValueBykey(object: Currencies, key: string) {
+  return Object.values(object).find((value: string) => object[key] === value);
+}
 
 interface UpdateFormProps {
   currency: string;
@@ -25,9 +38,18 @@ const validation = yup.object().shape({
 });
 
 export const UpdateForm = () => {
+  const [currencies, setCurrencies] = useState({});
   const { addToast } = useToast();
   const { updateCurrency } = useApp();
   const history = useHistory();
+
+  useEffect(() => {
+    const getCurrencies = async () => {
+      const response = await api.get('btc/currencies');
+      setCurrencies(response.data);
+    };
+    getCurrencies();
+  }, []);
 
   return (
     <Formik
@@ -47,7 +69,7 @@ export const UpdateForm = () => {
       validationSchema={validation}
     >
       {(formik: FormikProps<UpdateFormProps>) => {
-        const { dirty, isValid } = formik;
+        const { dirty, isValid, values } = formik;
 
         return (
           <Form>
@@ -65,6 +87,14 @@ export const UpdateForm = () => {
                   </>
                 )}
               </Field>
+              {currencies && values.currency && (
+                <Title>
+                  {`${values.currency}: ${getValueBykey(
+                    currencies,
+                    values.currency,
+                  )} (valor atual)`}
+                </Title>
+              )}
               <Field name="newValue">
                 {({
                   field, // { name, value, onChange, onBlur }

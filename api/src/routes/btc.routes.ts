@@ -8,4 +8,6 @@ btcRouter.get('/', ValidateAuth, BtcController.store);
 
 btcRouter.post('/', ValidateAuth, BtcController.updateCurrency);
 
+btcRouter.get('/currencies', BtcController.getCurrency);
+
 export default btcRouter;
