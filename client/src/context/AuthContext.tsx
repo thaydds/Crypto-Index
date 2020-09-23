@@ -6,15 +6,20 @@ interface LoginCredencials {
   password: string;
 }
 
+interface User {
+  email: string;
+  id: string;
+}
+
 interface AuthState {
   token: string;
   // eslint-disable-next-line @typescript-eslint/ban-types
-  user: object;
+  user: User;
 }
 
 interface AuthContextState {
   // eslint-disable-next-line @typescript-eslint/ban-types
-  user: object;
+  user: User;
   login: (loginCredencials: LoginCredencials) => void;
   logout: () => void;
 }
