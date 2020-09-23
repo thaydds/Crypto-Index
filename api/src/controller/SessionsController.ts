@@ -9,7 +9,13 @@ class SessionController {
       email,
       password,
     });
-    return response.json({ user, token });
+    return response.json({
+      user: {
+        email: user.email,
+        id: user.id,
+      },
+      token,
+    });
   }
 }
 
