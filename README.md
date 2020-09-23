@@ -2,6 +2,8 @@
 
 Crypto Index é uma aplicação que simula os valores do bitcoin e várias moedas usando a api  **CoinDesk**. A [documentação está disponível aqui](https://www.coindesk.com/coindesk-api).
 
+![chrome-capture (3)](https://user-images.githubusercontent.com/4451937/93963775-7322ab00-fd34-11ea-8a3e-7509d7ed6df0.gif)
+
 ---
 
 ## Requisitos :wrench:
