@@ -1,25 +1,42 @@
 # Boas vindas ao projeto Crypto Index!
 
-Você já usa o GitHub diariamente para desenvolver os exercícios, certo? Agora, para desenvolver os projetos, você deverá seguir as instruções a seguir. Fique atento a cada passo, e se tiver qualquer dúvida, nos envie por Slack! #vqv 🚀
-
-Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu projeto a partir deste repositório, utilizando uma branch específica e um Pull Request para colocar seus códigos.
+Crypto Index é uma aplicação que simula os valores do bitcoin e várias moedas usando a api  **CoinDesk**. A [documentação está disponível aqui](https://www.coindesk.com/coindesk-api).
 
 ---
 
-## O que deverá ser desenvolvido
+## Requisitos :wrench:
 
-Você vai desenvolver um app full-stack! Isso significa que você vai construir tanto a API quanto o front-end! 😃
+É necessário possui o Docker e Docker Compose nas versões mais atuais instalados no seu ambiente de desenvolvimento.
+[Você pode instalar essas dependências por aqui](https://docs.docker.com/compose/install/).
 
-A aplicação a ser contruída é um "index" para vermos o preço do BitCoin em diferentes moedas.
+## Como rodar o projeto :runner:
+
+Para executar o projeto, utilize o seguinte comando na raiz do projeto:
+
+```bash
+docker-compose up client
+```
+
+Esse comando pode demorar um pouco, uma vez que subimos todos os containers(client, api e database) de uma vez.
+
+Caso queira subir apenas a api e o banco juntos, use o comando:
+
+```bash
+docker-compose up api
+```
+
+e siga para a pasta client e execute um ```bash
+yarn && yarn start```
 
 ---
 
-## Desenvolvimento
+## Documentação
 
-Começando pela API, você vai desenvolver alguns endpoints conectando APIs externas e arquivos JSON locais do projeto.
+Clique para saber mais sobre as rotas, regras de negócio e especificação:
 
-A API externa que vamos utilizar é a da **CoinDesk**. A [documentação está disponível aqui](https://www.coindesk.com/coindesk-api).
+[client](https://github.com/betrybe/thayrone-technical-test/tree/thayrone-crypto-index/client).
 
-O front-end, vai basicamente servir como expositor para a API que você vai criar. São três telas simples que você precisará desenvolver.
+[api](https://github.com/betrybe/thayrone-technical-test/tree/thayrone-crypto-index/api).
 
-Você pode acessar um protótipo das telas [neste link](https://www.figma.com/file/7TbyLzHSCpMRNxHEAN0QOi/Crypto-Index?node-id=0%3A1).
+
+
