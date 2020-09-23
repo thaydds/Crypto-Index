@@ -23,6 +23,6 @@ jobs:
           cd client
           yarn
           yarn --check-files
-      - name: Check code quality
+      - name: Test client
         run: |
-          cd api && yarn test
+          cd client && yarn test
