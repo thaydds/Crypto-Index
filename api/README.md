@@ -6,11 +6,13 @@ Essa é a crypto index api construída em cima da **CoinDesk**. A [documentaçã
 
 ## Endpoints
 
-# /users [GET][PRIVATE]
+obs:nas rotas com a tag PRIVATE é preciso passar um token JWT valido para acessar.
 
-retorna um array de usuários cadastrados no sistema.é preciso passar um token JWT valido para acessar.
+### /users [GET][PRIVATE]
 
-# /users [POST]
+retorna um array de usuários cadastrados no sistema
+
+### /users [POST]
 
 cria um usuário no sistema no sistema passando os seguintes parametros:
 ```json
@@ -22,7 +24,7 @@ cria um usuário no sistema no sistema passando os seguintes parametros:
 obs: o email deve obedecer o formato de email e a senha ser uma string de digitos possuindo um tamanho igual a 6.
 
 
-# /sessions [POST]
+### /sessions [POST]
 
 verifica se o usuário é cadastrado no sistema e retorna dados do usuário e o token JWT.
 ```json
@@ -32,7 +34,7 @@ verifica se o usuário é cadastrado no sistema e retorna dados do usuário e o 
 }
 ```
 
-# /btc [GET][PRIVATE]
+### /btc [GET][PRIVATE]
 
 retorna os valores do bitcoin no seguinte formato:
 
@@ -84,7 +86,7 @@ retorna os valores do bitcoin no seguinte formato:
 }
 ```
 
-# /btc [POST][PRIVATE]
+### /btc [POST][PRIVATE]
 
 Altera o valor base das moedas EUR, CAD e BRL de um arquivo json na api passando um json no seguinte formato:
 
@@ -95,7 +97,7 @@ Altera o valor base das moedas EUR, CAD e BRL de um arquivo json na api passando
 }
 ```
 
-# /btc/currencies [GET][PRIVATE]
+### /btc/currencies [GET][PRIVATE]
 
 retorna os valores bases das moedas no seguinte formato: 
 
