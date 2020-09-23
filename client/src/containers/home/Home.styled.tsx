@@ -44,6 +44,14 @@ export const StyledH2 = styled.h2`
   letter-spacing: 0.2rem;
 `;
 
+export const StyledText = styled.p`
+  text-transform: lowercase;
+  font-weight: lighter;
+  letter-spacing: 0.2rem;
+  font-size: 10px;
+  margin-top: 20px;
+`;
+
 export const HomeContainer = styled.div`
   display: flex;
   align-items: center;

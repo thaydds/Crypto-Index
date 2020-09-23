@@ -5,6 +5,7 @@ import {
   HomeContainer,
   StyledCard,
   StyledH2,
+  StyledText,
 } from './Home.styled';
 import { useApp } from '../../context/AppContext';
 import { useToast } from '../../context/ToastContext';
@@ -58,6 +59,10 @@ export const Home = () => {
             </StyledCard>
           ))}
         </CardContainer>
+        <StyledText>
+          Powered by
+          <a href="https://www.coindesk.com/price/bitcoin">Coindex</a>
+        </StyledText>
       </HomeContainer>
     </>
   );
