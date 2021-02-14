@@ -21,6 +21,14 @@
   },
   "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
   "rules": {
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/*.stories.tsx"
+        ]
+      }
+    ],
     "prettier/prettier": "error",
     "react/jsx-curly-newline": "off",
     "react/prop-types": 0,
