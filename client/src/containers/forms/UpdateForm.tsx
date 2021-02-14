@@ -4,8 +4,7 @@ import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import { useToast } from '../../context/ToastContext';
 import { useApp } from '../../context/AppContext';
-import { Button, Select } from '../../components';
-import { CurrencyInput } from '../../components/Input/CurrencyInput';
+import { Button, Select, Input } from '../../components';
 import { api } from '../../services/api';
 
 import { StyledFormDiv, Error, ButtonContainer, Title } from './styles';
@@ -100,7 +99,8 @@ export const UpdateForm = () => {
                   meta,
                 }: FieldProps) => (
                   <>
-                    <CurrencyInput
+                    <Input
+                      isCurrency
                       type="text"
                       placeholder="ex: 5.44"
                       {...field}
