@@ -5,7 +5,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { StyledNav } from './styles';
 
-interface OwnProps {
+export interface OwnProps {
   handleClick: () => void;
 }
 
