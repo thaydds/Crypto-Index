@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledAnimatedText } from './AnimatedText';
+import { StyledAnimatedText } from './styles';
 
 export const AnimatedText = () => (
   <StyledAnimatedText>

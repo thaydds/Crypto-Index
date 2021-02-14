@@ -6,7 +6,7 @@ import {
   StyledCard,
   StyledH2,
   StyledText,
-} from './Home.styled';
+} from './styles';
 import { useApp } from '../../context/AppContext';
 import { useToast } from '../../context/ToastContext';
 

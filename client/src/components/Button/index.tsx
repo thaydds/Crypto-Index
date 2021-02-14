@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledButton } from './Button.styled';
+import { StyledButton } from './styles';
 
 interface OwnProps {
   type: 'button' | 'submit';

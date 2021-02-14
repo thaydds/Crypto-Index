@@ -5,7 +5,7 @@ import { useApp } from '../../context/AppContext';
 import { useToast } from '../../context/ToastContext';
 import { useAuth } from '../../context/AuthContext';
 import { Button, Input } from '../../components';
-import { StyledFormDiv, Error } from './LoginForm.styled';
+import { StyledFormDiv, Error } from './styles';
 
 const initialValues = {
   email: '',

@@ -8,12 +8,7 @@ import { Button, Select } from '../../components';
 import { CurrencyInput } from '../../components/Input/CurrencyInput';
 import { api } from '../../services/api';
 
-import {
-  StyledFormDiv,
-  Error,
-  ButtonContainer,
-  Title,
-} from './LoginForm.styled';
+import { StyledFormDiv, Error, ButtonContainer, Title } from './styles';
 
 const initialValues = {
   currency: '',

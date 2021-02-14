@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledInput } from './Input.styled';
+import { StyledInput } from './styles';
 
 interface OwnProps {
   type: 'text' | 'password' | 'number';

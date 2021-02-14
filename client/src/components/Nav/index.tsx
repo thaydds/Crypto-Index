@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { StyledNav } from './Nav.styled';
+import { StyledNav } from './styles';
 
 interface OwnProps {
   handleClick: () => void;

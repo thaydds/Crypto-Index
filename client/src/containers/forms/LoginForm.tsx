@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Formik, Field, FieldProps, FormikProps } from 'formik';
 import * as yup from 'yup';
 import { Button, Input } from '../../components';
-import { StyledFormDiv, Error } from './LoginForm.styled';
+import { StyledFormDiv, Error } from './styles';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 
