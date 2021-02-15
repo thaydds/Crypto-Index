@@ -38,4 +38,4 @@ export const showToast = ({ type, message }: OwnProps) => {
       toast.info(message);
   }
 };
-export const ToastAnimated = () => <Toast />;
+export const ToastAnimated = () => <Toast data-testid="toast" />;
